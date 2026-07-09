@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 580" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" role="img" aria-label="Fluxo típico de um run lançado pelo app">
+  <style>
+    .bg        { fill: #ffffff; stroke: #d0d7de; }
+    .box       { fill: #f6f8fa; stroke: #d0d7de; }
+    .snake-box { fill: #ecfdf5; stroke: #34d399; }
+    .dart-box  { fill: #eff6ff; stroke: #60a5fa; }
+    .life      { stroke: #d0d7de; stroke-width: 1.5; stroke-dasharray: 4 4; }
+    .body      { fill: #1f2328; font-size: 14px; font-weight: 600; }
+    .note-t    { fill: #1f2328; font-size: 12.5px; }
+    .muted     { fill: #57606a; font-size: 12px; }
+    .mono      { fill: #57606a; font-size: 11.5px; font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace; }
+    .ev        { stroke: #059669; stroke-width: 2; fill: none; }
+    .ev-head   { fill: #059669; }
+    .ev-label  { fill: #059669; font-size: 13px; font-weight: 600; }
+    .cmd       { stroke: #0969da; stroke-width: 2; fill: none; }
+    .cmd-head  { fill: #0969da; }
+    .cmd-label { fill: #0969da; font-size: 13px; font-weight: 600; }
+    .proc      { stroke: #57606a; stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; }
+    .proc-head { fill: #57606a; }
+    .proc-label{ fill: #57606a; font-size: 13px; font-weight: 600; }
+    @media (prefers-color-scheme: dark) {
+      .bg        { fill: #0d1117; stroke: #30363d; }
+      .box       { fill: #161b22; stroke: #30363d; }
+      .snake-box { fill: #10231c; stroke: #2ea043; }
+      .dart-box  { fill: #0d2138; stroke: #1f6feb; }
+      .life      { stroke: #30363d; }
+      .body, .note-t { fill: #e6edf3; }
+      .muted, .mono  { fill: #8b949e; }
+      .ev        { stroke: #3fb950; }
+      .ev-head   { fill: #3fb950; }
+      .ev-label  { fill: #3fb950; }
+      .cmd       { stroke: #58a6ff; }
+      .cmd-head  { fill: #58a6ff; }
+      .cmd-label { fill: #58a6ff; }
+      .proc      { stroke: #8b949e; }
+      .proc-head { fill: #8b949e; }
+      .proc-label{ fill: #8b949e; }
+    }
+  </style>
+
+  <rect class="bg" x="0.5" y="0.5" width="959" height="579" rx="12"/>
+
+  <!-- participantes -->
+  <rect class="dart-box" x="120" y="36" width="220" height="56" rx="8"/>
+  <text class="body" x="230" y="60" text-anchor="middle">Dart Desktop (app)</text>
+  <text class="mono" x="230" y="80" text-anchor="middle">servidor WS embarcado</text>
+
+  <rect class="snake-box" x="620" y="36" width="220" height="56" rx="8"/>
+  <text class="body" x="730" y="60" text-anchor="middle">logger plugin</text>
+  <text class="mono" x="730" y="80" text-anchor="middle">dentro do processo Snakemake</text>
+
+  <!-- linhas de vida -->
+  <line class="life" x1="230" y1="92" x2="230" y2="556"/>
+  <line class="life" x1="730" y1="92" x2="730" y2="556"/>
+
+  <!-- 1-2: preparação no app -->
+  <rect class="box" x="90" y="112" width="280" height="30" rx="6"/>
+  <text class="note-t" x="230" y="131" text-anchor="middle">1 · abre o servidor WS em porta efêmera</text>
+  <rect class="box" x="90" y="150" width="280" height="30" rx="6"/>
+  <text class="note-t" x="230" y="169" text-anchor="middle">2 · gera o token do run</text>
+
+  <!-- 3: o app lança o Snakemake -->
+  <text class="proc-label" x="480" y="206" text-anchor="middle">3 · Process.start("snakemake") — o app é dono do processo</text>
+  <line class="proc" x1="230" y1="216" x2="718" y2="216"/>
+  <polygon class="proc-head" points="718,210 730,216 718,222"/>
+  <text class="mono" x="480" y="234" text-anchor="middle">--logger dart · --logger-dart-address ws://127.0.0.1:PORT</text>
+  <text class="mono" x="480" y="250" text-anchor="middle">env: SNAKEMAKE_LOGGER_DART_TOKEN=&lt;token&gt;</text>
+
+  <!-- 4: conexão -->
+  <text class="muted" x="480" y="282" text-anchor="middle">4 · conecta — Authorization: Bearer &lt;token&gt;</text>
+  <line class="proc" x1="730" y1="292" x2="242" y2="292"/>
+  <polygon class="proc-head" points="242,286 230,292 242,298"/>
+
+  <!-- hello / replay -->
+  <text class="ev-label" x="480" y="322" text-anchor="middle">hello</text>
+  <line class="ev" x1="730" y1="332" x2="242" y2="332"/>
+  <polygon class="ev-head" points="242,326 230,332 242,338"/>
+
+  <text class="cmd-label" x="480" y="362" text-anchor="middle">replay(since_seq = último seq processado)</text>
+  <line class="cmd" x1="230" y1="372" x2="718" y2="372"/>
+  <polygon class="cmd-head" points="718,366 730,372 718,378"/>
+
+  <!-- 5: eventos em tempo real -->
+  <text class="ev-label" x="480" y="402" text-anchor="middle">5 · eventos em tempo real</text>
+  <line class="ev" x1="730" y1="414" x2="242" y2="414"/>
+  <polygon class="ev-head" points="242,408 230,414 242,420"/>
+  <text class="mono" x="480" y="432" text-anchor="middle">workflow_started · rulegraph · run_info · job_* · progress · log …</text>
+
+  <!-- 6: fim do run -->
+  <text class="ev-label" x="480" y="464" text-anchor="middle">6 · bye — fim do run, flush da fila</text>
+  <line class="ev" x1="730" y1="474" x2="242" y2="474"/>
+  <polygon class="ev-head" points="242,468 230,474 242,480"/>
+
+  <!-- 7: desfecho -->
+  <rect class="box" x="75" y="504" width="310" height="30" rx="6"/>
+  <text class="note-t" x="230" y="523" text-anchor="middle">7 · exit code do processo confirma o desfecho</text>
+</svg>

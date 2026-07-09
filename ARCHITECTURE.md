@@ -156,22 +156,17 @@ fila corrente segue normalmente.
 
 ## Fluxo típico (app lança o run)
 
-```
-App                                    Plugin (dentro do Snakemake)
- │ 1. abre servidor WS em porta efêmera
- │ 2. gera token
- │ 3. Process.start("snakemake",
- │      --logger dart,
- │      --logger-dart-address ws://127.0.0.1:PORT,
- │      env: SNAKEMAKE_LOGGER_DART_TOKEN)
- │                                       │ 4. conecta com Authorization header
- │ <────────────── hello ────────────────│
- │ ── replay(since_seq=0) ──────────────>│
- │ <── workflow_started, rulegraph, ... ─│ 5. eventos em tempo real
- │ <── progress, job_*, ... ─────────────│
- │ <────────────── bye ──────────────────│ 6. fim do run + flush
- │ 7. exit code do processo confirma o desfecho
-```
+<p align="center">
+  <img src="docs/run-flow.svg" width="100%"
+       alt="Sequência de um run: (1) o app abre o servidor WS em porta efêmera
+            e (2) gera o token do run; (3) lança o Snakemake via Process.start()
+            com --logger dart, o endereço ws:// e o token na env var; (4) o
+            plugin conecta com Authorization: Bearer e envia hello; o app
+            responde replay(since_seq); (5) o plugin transmite os eventos em
+            tempo real (workflow_started, rulegraph, job_*, progress, log…);
+            (6) no fim faz flush da fila e envia bye; (7) o exit code do
+            processo confirma o desfecho.">
+</p>
 
 ## Uso rápido
 
