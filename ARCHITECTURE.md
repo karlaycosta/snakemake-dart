@@ -8,7 +8,7 @@ diretamente nele.
 ## Visão geral
 
 <p align="center">
-  <img src="docs/overview.svg" width="840"
+  <img src="docs/overview.svg" width="100%"
        alt="Visão geral: o logger plugin dentro do processo Snakemake conecta
             como cliente WebSocket ao servidor embarcado no app Dart Desktop e
             envia os eventos do workflow; o app responde com comandos (replay,
