@@ -7,18 +7,14 @@ diretamente nele.
 
 ## Visão geral
 
-```
-┌─────────────────────┐                        ┌──────────────────────────────┐
-│  Snakemake          │                        │  Dart Desktop                │
-│  ┌───────────────┐  │   WebSocket (ws://)    │  ┌────────────────────────┐  │
-│  │ logger plugin │──┼────────────────────────┼─>│ servidor WS embarcado  │  │
-│  │ (cliente WS)  │<─┼───── comandos ─────────┼──│ (shelf, 127.0.0.1)     │  │
-│  └───────────────┘  │                        │  └───────────┬────────────┘  │
-└─────────▲───────────┘                        │       stream de eventos      │
-          │                                    │              ▼               │
-          └───────── Process.start() ──────────│   reducer → estado da UI     │
-                 (o app lança o Snakemake)     └──────────────────────────────┘
-```
+<p align="center">
+  <img src="docs/overview.svg" width="840"
+       alt="Visão geral: o logger plugin dentro do processo Snakemake conecta
+            como cliente WebSocket ao servidor embarcado no app Dart Desktop e
+            envia os eventos do workflow; o app responde com comandos (replay,
+            ping), consolida os eventos num reducer de estado e é quem lança o
+            processo Snakemake via Process.start() — cancelar = SIGTERM.">
+</p>
 
 Decisões estruturais:
 

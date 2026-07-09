@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" role="img" aria-label="Visão geral da ponte Snakemake–Dart">
+  <style>
+    .bg        { fill: #ffffff; stroke: #d0d7de; }
+    .box       { fill: #f6f8fa; stroke: #d0d7de; }
+    .snake-box { fill: #ecfdf5; stroke: #34d399; }
+    .dart-box  { fill: #eff6ff; stroke: #60a5fa; }
+    .title     { fill: #1f2328; font-size: 17px; font-weight: 600; }
+    .body      { fill: #1f2328; font-size: 13px; font-weight: 600; }
+    .muted     { fill: #57606a; font-size: 12px; }
+    .mono      { fill: #57606a; font-size: 11.5px; font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace; }
+    .ev        { stroke: #059669; stroke-width: 2; fill: none; }
+    .ev-head   { fill: #059669; }
+    .ev-label  { fill: #059669; font-size: 13px; font-weight: 600; }
+    .cmd       { stroke: #0969da; stroke-width: 2; fill: none; }
+    .cmd-head  { fill: #0969da; }
+    .cmd-label { fill: #0969da; font-size: 13px; font-weight: 600; }
+    .proc      { stroke: #57606a; stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; }
+    .proc-head { fill: #57606a; }
+    @media (prefers-color-scheme: dark) {
+      .bg        { fill: #0d1117; stroke: #30363d; }
+      .box       { fill: #161b22; stroke: #30363d; }
+      .snake-box { fill: #10231c; stroke: #2ea043; }
+      .dart-box  { fill: #0d2138; stroke: #1f6feb; }
+      .title, .body { fill: #e6edf3; }
+      .muted, .mono { fill: #8b949e; }
+      .ev        { stroke: #3fb950; }
+      .ev-head   { fill: #3fb950; }
+      .ev-label  { fill: #3fb950; }
+      .cmd       { stroke: #58a6ff; }
+      .cmd-head  { fill: #58a6ff; }
+      .cmd-label { fill: #58a6ff; }
+      .proc      { stroke: #8b949e; }
+      .proc-head { fill: #8b949e; }
+    }
+  </style>
+
+  <rect class="bg" x="0.5" y="0.5" width="959" height="439" rx="12"/>
+
+  <!-- Snakemake (processo do workflow) -->
+  <rect class="box" x="42" y="96" width="300" height="200" rx="10"/>
+  <text class="title" x="64" y="128">Snakemake</text>
+  <text class="muted" x="64" y="147">processo do workflow</text>
+  <rect class="snake-box" x="64" y="166" width="256" height="104" rx="8"/>
+  <text class="body"  x="192" y="192" text-anchor="middle">logger plugin</text>
+  <text class="muted" x="192" y="210" text-anchor="middle">cliente WebSocket</text>
+  <text class="mono"  x="192" y="230" text-anchor="middle">fila assíncrona · nunca bloqueia o run</text>
+  <text class="mono"  x="192" y="248" text-anchor="middle">buffer de replay · reconexão c/ backoff</text>
+
+  <!-- Dart Desktop (app) -->
+  <rect class="box" x="618" y="56" width="300" height="320" rx="10"/>
+  <text class="title" x="640" y="88">Dart Desktop (app)</text>
+  <rect class="dart-box" x="640" y="104" width="256" height="84" rx="8"/>
+  <text class="body"  x="768" y="130" text-anchor="middle">servidor WS embarcado</text>
+  <text class="mono"  x="768" y="150" text-anchor="middle">shelf · 127.0.0.1 · porta efêmera</text>
+  <text class="muted" x="768" y="170" text-anchor="middle">valida token · dedup por seq</text>
+
+  <line class="cmd" x1="768" y1="188" x2="768" y2="238"/>
+  <polygon class="cmd-head" points="762,236 768,248 774,236"/>
+  <text class="muted" x="782" y="222">stream de eventos</text>
+
+  <rect class="dart-box" x="640" y="248" width="256" height="84" rx="8"/>
+  <text class="body"  x="768" y="274" text-anchor="middle">reducer → estado do run</text>
+  <text class="muted" x="768" y="294" text-anchor="middle">jobs · progresso · DAG · logs · erros</text>
+  <text class="muted" x="768" y="312" text-anchor="middle">ChangeNotifier / Riverpod / Bloc</text>
+
+  <!-- eventos: plugin → app -->
+  <text class="ev-label" x="480" y="148" text-anchor="middle">eventos (envelope JSON)</text>
+  <line class="ev" x1="346" y1="166" x2="604" y2="166"/>
+  <polygon class="ev-head" points="602,160 614,166 602,172"/>
+  <text class="mono" x="480" y="188" text-anchor="middle">ws:// · at-least-once · seq monotônico</text>
+
+  <!-- comandos: app → plugin -->
+  <line class="cmd" x1="614" y1="222" x2="356" y2="222"/>
+  <polygon class="cmd-head" points="358,216 346,222 358,228"/>
+  <text class="cmd-label" x="480" y="246" text-anchor="middle">comandos: replay · ping</text>
+  <text class="mono" x="480" y="268" text-anchor="middle">Authorization: Bearer &lt;token&gt;</text>
+
+  <!-- o app lança o processo -->
+  <path class="proc" d="M 768 376 V 406 H 192 V 308"/>
+  <polygon class="proc-head" points="186,310 192,298 198,310"/>
+  <text class="muted" x="480" y="398" text-anchor="middle">Process.start() — o app lança e é dono do processo (cancelar = SIGTERM)</text>
+</svg>
