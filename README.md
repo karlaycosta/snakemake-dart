@@ -5,14 +5,14 @@ em tempo real dentro de uma aplicação Dart Desktop, **sem servidor
 intermediário**: o app embarca um servidor WebSocket e o plugin de logging do
 Snakemake conecta diretamente nele.
 
-- 📐 **[ARCHITECTURE.md](ARCHITECTURE.md)** — arquitetura, protocolo, segurança
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** — arquitetura, protocolo, segurança
   e modos de falha.
-- 🛠️ **[INSTALL.md](INSTALL.md)** — como compilar/instalar o plugin no
+- **[INSTALL.md](INSTALL.md)** — como compilar/instalar o plugin no
   Snakemake, rodar os testes (Python e Dart) e validar ponta-a-ponta.
-- 🐍 **[python/](python/)** —
+- **[python/](python/)** —
   [`snakemake-logger-plugin-dart`](https://pypi.org/project/snakemake-logger-plugin-dart/)
   (PyPI): cliente WebSocket assíncrono e resiliente, `--logger dart`.
-- 🎯 **[dart/](dart/)** —
+- **[dart/](dart/)** —
   [`snakemake_bridge`](https://pub.dev/packages/snakemake_bridge) (pub.dev):
   servidor embarcado, modelos de eventos tipados, reducer de estado e launcher
   do processo.
