@@ -1,0 +1,38 @@
+[project]
+name = "snakemake-logger-plugin-dart"
+version = "0.1.0"
+description = "Snakemake logger plugin that streams workflow events to a Dart desktop app over WebSocket."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "Deriks Karlay Dias Costa", email = "karlaycosta@gmail.com" },
+]
+requires-python = ">=3.11"
+keywords = ["snakemake", "snakemake-plugin", "logger", "websocket", "dart"]
+dependencies = [
+    "snakemake-interface-logger-plugins>=1.2.0,<3",
+    "websockets>=12.0",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/karlaycosta/snakemake-dart"
+Repository = "https://github.com/karlaycosta/snakemake-dart"
+Issues = "https://github.com/karlaycosta/snakemake-dart/issues"
+Documentation = "https://github.com/karlaycosta/snakemake-dart/blob/main/ARCHITECTURE.md"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/snakemake_logger_plugin_dart"]

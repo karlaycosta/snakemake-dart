@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+python/dist/
+.venv/
+
+# Dart
+.dart_tool/
+dart/pubspec.lock
