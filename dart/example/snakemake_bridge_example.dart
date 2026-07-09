@@ -3,7 +3,7 @@
 /// Rode-o e aponte o plugin (ou um run real do Snakemake) para o endereço
 /// impresso:
 ///
-///   SNAKEMAKE_LOGGER_DART_TOKEN=dev dart run example/monitor_cli.dart
+///   SNAKEMAKE_LOGGER_DART_TOKEN=dev dart run example/snakemake_bridge_example.dart
 ///   snakemake --cores 2 --logger dart \
 ///       --logger-dart-address ws://127.0.0.1:PORTA
 library;

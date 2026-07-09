@@ -10,14 +10,15 @@ Map<String, dynamic> envelope(
   String type, [
   Map<String, dynamic> payload = const {},
   String runId = 'run-test',
-]) => {
-  'v': 1,
-  'seq': seq,
-  'ts': '2026-07-03T12:00:00+00:00',
-  'run_id': runId,
-  'type': type,
-  'payload': payload,
-};
+]) =>
+    {
+      'v': 1,
+      'seq': seq,
+      'ts': '2026-07-03T12:00:00+00:00',
+      'run_id': runId,
+      'type': type,
+      'payload': payload,
+    };
 
 void main() {
   test('rejects connections without the token', () async {
@@ -83,8 +84,7 @@ void main() {
     expect(
       state.jobs[1]!.ruleName,
       'align',
-      reason:
-          'rule name from JOB_INFO must fill the job created by '
+      reason: 'rule name from JOB_INFO must fill the job created by '
           'the earlier JOB_STARTED',
     );
     expect(state.progress, 1.0);
@@ -120,9 +120,13 @@ void main() {
     send(envelope(0, 'hello', {'pid': 2, 'schema': 1}, 'run-B'));
     send(envelope(1, 'workflow_started', {'snakefile': 'B'}, 'run-B'));
     send(
-      envelope(2, 'job_started', {
-        'job_ids': [1],
-      }, 'run-B'),
+      envelope(
+          2,
+          'job_started',
+          {
+            'job_ids': [1],
+          },
+          'run-B'),
     );
     send(envelope(3, 'job_info', {'job_id': 1, 'rule_name': 'map'}, 'run-B'));
     send(
@@ -141,9 +145,12 @@ void main() {
     );
     expect(state.runId, 'run-B');
     expect(state.snakefile, 'B', reason: 'state reflects run B, not run A');
-    expect(state.jobs.keys, [
-      1,
-    ], reason: 'run A jobs were cleared on the new run');
+    expect(
+        state.jobs.keys,
+        [
+          1,
+        ],
+        reason: 'run A jobs were cleared on the new run');
     expect(state.jobs[1]!.ruleName, 'map');
     expect(state.status, RunStatus.finished);
     expect(state.progress, 1.0);
@@ -202,10 +209,13 @@ void main() {
         }),
       ),
     );
-    expect(state.statsByRule, {
-      'align': 3,
-      'sort': 2,
-    }, reason: 'a chave agregada `total` não é uma regra');
+    expect(
+        state.statsByRule,
+        {
+          'align': 3,
+          'sort': 2,
+        },
+        reason: 'a chave agregada `total` não é uma regra');
     expect(state.total, 5);
 
     for (var i = 0; i < WorkflowRunState.maxLogLines + 10; i++) {

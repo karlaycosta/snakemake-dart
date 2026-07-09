@@ -27,7 +27,7 @@ replay, e o servidor panoptes pelo próprio app.
 ```bash
 # terminal 1 — "app"
 cd dart && dart pub get
-SNAKEMAKE_LOGGER_DART_TOKEN=dev dart run example/monitor_cli.dart
+SNAKEMAKE_LOGGER_DART_TOKEN=dev dart run example/snakemake_bridge_example.dart
 # LISTENING port=NNNNN ...
 
 # terminal 2 — um run real usaria: snakemake --logger dart \

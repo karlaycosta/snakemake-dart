@@ -11,4 +11,4 @@
 - `WorkflowRunState`: reducer de eventos → estado consultável do run (jobs,
   progresso, DAG, logs, erros).
 - `SnakemakeRunner`: lança e gerencia o processo `snakemake`.
-- Exemplo `example/monitor_cli.dart`: monitor headless para teste no terminal.
+- Exemplo `example/snakemake_bridge_example.dart`: monitor headless para teste no terminal.

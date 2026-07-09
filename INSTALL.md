@@ -116,7 +116,7 @@ Duas abas de terminal:
 ```bash
 # aba 1 — o "app" (monitor headless de exemplo)
 cd snakemake-dart/dart
-SNAKEMAKE_LOGGER_DART_TOKEN=dev dart run example/monitor_cli.dart
+SNAKEMAKE_LOGGER_DART_TOKEN=dev dart run example/snakemake_bridge_example.dart
 # imprime: LISTENING port=NNNNN address=ws://127.0.0.1:NNNNN
 ```
 
@@ -138,7 +138,7 @@ final, `ByeEvent` seguido de:
 DONE status=finished jobs=N progress=1.0
 ```
 
-O `monitor_cli` encerra sozinho ao receber o `bye`. Se nada aparecer na aba 1,
+O exemplo encerra sozinho ao receber o `bye`. Se nada aparecer na aba 1,
 os suspeitos usuais são: token diferente entre as abas, porta errada, ou o
 plugin instalado num ambiente Python que não é o do `snakemake` em uso.
 

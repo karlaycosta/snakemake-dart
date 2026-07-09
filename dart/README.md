@@ -21,7 +21,7 @@ dependencies:
 | `lib/src/workflow_events.dart` | Modelos tipados dos eventos (sealed classes, sem codegen; tipos desconhecidos viram `UnknownEvent`). |
 | `lib/src/workflow_state.dart` | Reducer: stream de eventos → estado consultável do run (jobs, progresso, DAG, logs, erros). |
 | `lib/src/snakemake_runner.dart` | Lança e é dono do processo `snakemake` (cancelamento = SIGTERM). |
-| `example/monitor_cli.dart` | "App" headless mínimo para testar a ponte pelo terminal. |
+| `example/snakemake_bridge_example.dart` | "App" headless mínimo para testar a ponte pelo terminal. |
 
 ## Uso no app
 
@@ -47,7 +47,7 @@ final runner = await SnakemakeRunner.start(
 ## Teste rápido sem Snakemake
 
 ```bash
-SNAKEMAKE_LOGGER_DART_TOKEN=dev dart run example/monitor_cli.dart
+SNAKEMAKE_LOGGER_DART_TOKEN=dev dart run example/snakemake_bridge_example.dart
 # em outro terminal, rode o Snakemake (ou o plugin) apontando para a porta impressa
 ```
 

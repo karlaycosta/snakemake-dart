@@ -63,11 +63,12 @@ class WorkflowServer {
   }
 
   Handler _checkToken(Handler inner) => (Request request) {
-    if (token != null && request.headers['authorization'] != 'Bearer $token') {
-      return Response(401, body: 'invalid token');
-    }
-    return inner(request);
-  };
+        if (token != null &&
+            request.headers['authorization'] != 'Bearer $token') {
+          return Response(401, body: 'invalid token');
+        }
+        return inner(request);
+      };
 
   void _onConnection(WebSocketChannel channel, String? protocol) {
     // A última conexão do plugin vence; um plugin reconectando substitui a si mesmo.
