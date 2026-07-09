@@ -16,6 +16,17 @@
     .cmd-label { fill: #0969da; font-size: 13px; font-weight: 600; }
     .proc      { stroke: #57606a; stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; }
     .proc-head { fill: #57606a; }
+    .dot-ev, .dot-cmd, .dot-dn { opacity: 0; }
+    @media (prefers-reduced-motion: no-preference) {
+      .dot-ev  { animation: flow-ev 2.4s linear infinite; }
+      .dot-cmd { animation: flow-cmd 3.6s linear infinite; }
+      .dot-dn  { animation: flow-dn 2.4s linear infinite; }
+      .proc    { animation: march 6s linear infinite; }
+    }
+    @keyframes flow-ev  { from { transform: translateX(0);      opacity: 0 } 12% { opacity: 1 } 88% { opacity: 1 } to { transform: translateX(250px);  opacity: 0 } }
+    @keyframes flow-cmd { from { transform: translateX(0);      opacity: 0 } 12% { opacity: 1 } 88% { opacity: 1 } to { transform: translateX(-250px); opacity: 0 } }
+    @keyframes flow-dn  { from { transform: translateY(0);      opacity: 0 } 15% { opacity: 1 } 85% { opacity: 1 } to { transform: translateY(44px);   opacity: 0 } }
+    @keyframes march    { to { stroke-dashoffset: -90; } }
     @media (prefers-color-scheme: dark) {
       .bg        { fill: #0d1117; stroke: #30363d; }
       .box       { fill: #161b22; stroke: #30363d; }
@@ -56,6 +67,7 @@
 
   <line class="cmd" x1="768" y1="188" x2="768" y2="238"/>
   <polygon class="cmd-head" points="762,236 768,248 774,236"/>
+  <circle class="cmd-head dot-dn" cx="768" cy="190" r="3" style="animation-delay:1.2s"/>
   <text class="muted" x="782" y="222">stream de eventos</text>
 
   <rect class="dart-box" x="640" y="248" width="256" height="84" rx="8"/>
@@ -67,11 +79,15 @@
   <text class="ev-label" x="480" y="148" text-anchor="middle">eventos (envelope JSON)</text>
   <line class="ev" x1="346" y1="166" x2="604" y2="166"/>
   <polygon class="ev-head" points="602,160 614,166 602,172"/>
+  <circle class="ev-head dot-ev" cx="350" cy="166" r="3.5"/>
+  <circle class="ev-head dot-ev" cx="350" cy="166" r="3.5" style="animation-delay:.8s"/>
+  <circle class="ev-head dot-ev" cx="350" cy="166" r="3.5" style="animation-delay:1.6s"/>
   <text class="mono" x="480" y="188" text-anchor="middle">ws:// · at-least-once · seq monotônico</text>
 
   <!-- comandos: app → plugin -->
   <line class="cmd" x1="614" y1="222" x2="356" y2="222"/>
   <polygon class="cmd-head" points="358,216 346,222 358,228"/>
+  <circle class="cmd-head dot-cmd" cx="610" cy="222" r="3"/>
   <text class="cmd-label" x="480" y="246" text-anchor="middle">comandos: replay · ping</text>
   <text class="mono" x="480" y="268" text-anchor="middle">Authorization: Bearer &lt;token&gt;</text>
 
